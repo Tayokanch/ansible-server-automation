@@ -1,0 +1,7 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for postgresql
+
+ 
+- import_tasks: start_postgresql.yaml
+- import_tasks: enable_postgresql.yaml

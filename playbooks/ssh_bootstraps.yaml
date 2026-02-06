@@ -1,0 +1,9 @@
+- name: Apply SSH Public to my servers
+  hosts: all_servers
+  become: yes
+  tasks:
+    - name: Add my public SSH key to my remote servers
+      authorized_key:
+        user: tayo
+        state: present
+        key: "{{ lookup('file', '~/.ssh/mysshkey.pub') }}"
