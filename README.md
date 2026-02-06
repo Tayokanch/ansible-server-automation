@@ -73,7 +73,7 @@ ansible_ssh_private_key_file=~/.ssh/mysshkey
 ```
 ## Roles
 
-## 4. Start Nginx  (`nginx/tasks/start_nginx.yaml`)
+## 4. Start Nginx  (`playbooks/nginx/tasks/start_nginx.yaml`)
 
 ```yaml
 - name: Install nginx
@@ -82,7 +82,7 @@ ansible_ssh_private_key_file=~/.ssh/mysshkey
     state: present
 ```
 
-## 5. Enable Nginx (`nginx/tasks/enable_nginx.yaml`)
+## 5. Enable Nginx (`playbooks/nginx/tasks/enable_nginx.yaml`)
 
 ```yaml
 - name: Enable Nginx is running
@@ -92,7 +92,7 @@ ansible_ssh_private_key_file=~/.ssh/mysshkey
     enabled: yes
 ```
 
-## 6. Start Postgresql  (`nginx/tasks/start_postgresql.yaml`)
+## 6. Start Postgresql  (`playbooks/nginx/tasks/start_postgresql.yaml`)
 
 ```yaml
 - name: Install postgresql
@@ -101,7 +101,7 @@ ansible_ssh_private_key_file=~/.ssh/mysshkey
     state: present
 ```
 
-## 7. Enable postgresql (`nginx/tasks/enable_postgresql.yaml`)
+## 7. Enable postgresql (`playbooks/nginx/tasks/enable_postgresql.yaml`)
 
 ```yaml
 - name: Enable postgresql is running
@@ -109,4 +109,17 @@ ansible_ssh_private_key_file=~/.ssh/mysshkey
     name: postgresql
     state: started
     enabled: yes
+```
+## 8. Nginx Tasks Entry Point (`playbooks/nginx/tasks/main.yaml`)
+
+```yaml
+- import_tasks: start_nginx.yaml
+- import_tasks: enable_nginx.yaml
+```
+
+## 9. Posgresql Tasks Entry Point (`playbooks/postgresql/tasks/main.yaml`)
+
+```yaml
+- import_tasks: start_postgresql.yaml
+- import_tasks: enable_postgresql.yaml
 ```
